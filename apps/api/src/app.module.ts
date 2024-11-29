@@ -9,6 +9,7 @@ import { AnswersController } from './answers/controllers/answer.controler';
 import { CreateAnswerService } from './answers/services/create-answer.service';
 import { Answer } from './answers/entities/answer.entity';
 import { ListQuestionAnswersService } from './questions/services/list-question-answers.service';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { ListQuestionAnswersService } from './questions/services/list-question-a
     }),
     TypeOrmModule.forFeature([Question]),
     TypeOrmModule.forFeature([Answer]),
+    UsersModule,
   ],
   controllers: [QuestionsController, AnswersController],
   providers: [
