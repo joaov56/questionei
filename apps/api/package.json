@@ -22,7 +22,7 @@
     "migration:run": "yarn typeorm migration:run -- -d ./src/config/typeorm.ts",
     "migration:generate": "yarn typeorm -- -d ./src/config/typeorm.ts migration:generate ./migrations/$npm_config_name",
     "migration:create": "yarn typeorm -- migration:create ./migrations/$npm_config_name",
-    "migration:revert": "yarntypeorm -- -d ./src/config/typeorm.ts migration:revert"
+    "migration:revert": "yarn typeorm -- -d ./src/config/typeorm.ts migration:revert"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

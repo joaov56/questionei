@@ -2,14 +2,11 @@ import {
   MigrationInterface,
   QueryRunner,
   Table,
-  TableColumn,
   TableForeignKey,
 } from 'typeorm';
 
-export class Migrations1730775407305 implements MigrationInterface {
+export class Migrations1730777988764 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.createDatabase('qstionei', true);
-
     await queryRunner.createTable(
       new Table({
         name: 'question',
@@ -19,6 +16,7 @@ export class Migrations1730775407305 implements MigrationInterface {
             type: 'int',
             isPrimary: true,
           },
+
           {
             name: 'title',
             type: 'varchar',
@@ -54,8 +52,12 @@ export class Migrations1730775407305 implements MigrationInterface {
             isPrimary: true,
           },
           {
-            name: 'name',
+            name: 'answer',
             type: 'varchar',
+          },
+          {
+            name: 'questionId',
+            type: 'int',
           },
           {
             name: 'created_at',
@@ -65,14 +67,6 @@ export class Migrations1730775407305 implements MigrationInterface {
         ],
       }),
       true,
-    );
-
-    await queryRunner.addColumn(
-      'answer',
-      new TableColumn({
-        name: 'questionId',
-        type: 'int',
-      }),
     );
 
     await queryRunner.createForeignKey(
@@ -86,5 +80,5 @@ export class Migrations1730775407305 implements MigrationInterface {
     );
   }
 
-  public async down(queryRunner: QueryRunner): Promise<void> {}
+  public async down(): Promise<void> {}
 }

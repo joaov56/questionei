@@ -7,6 +7,6 @@ export class QuestionsController {
 
   @Get()
   getQuestions() {
-    return '';
+    return this.createQuestionService.execute();
   }
 }

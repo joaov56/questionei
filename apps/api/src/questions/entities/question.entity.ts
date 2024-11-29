@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Question {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('increment')
   id: number;
 
   @Column()
@@ -19,7 +19,4 @@ export class Question {
 
   @Column()
   level: string;
-
-  @Column({ default: true })
-  isActive: boolean;
 }
