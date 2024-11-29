@@ -5,6 +5,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import typeorm from './config/typeorm';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Question } from './questions/entities/question.entity';
+import { AnswersController } from './answers/controllers/answer.controler';
+import { CreateAnswerService } from './answers/services/create-answer.service';
+import { Answer } from './answers/entities/answer.entity';
 
 @Module({
   imports: [
@@ -18,8 +21,9 @@ import { Question } from './questions/entities/question.entity';
         configService.get('typeorm'),
     }),
     TypeOrmModule.forFeature([Question]),
+    TypeOrmModule.forFeature([Answer]),
   ],
-  controllers: [QuestionsController],
-  providers: [CreateQuestionService],
+  controllers: [QuestionsController, AnswersController],
+  providers: [CreateQuestionService, CreateAnswerService],
 })
 export class AppModule {}
