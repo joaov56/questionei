@@ -7,16 +7,18 @@ import {
 
 export class Migrations1730777988764 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`);
+
     await queryRunner.createTable(
       new Table({
         name: 'question',
         columns: [
           {
             name: 'id',
-            type: 'int',
+            type: 'uuid',
             isPrimary: true,
+            default: 'uuid_generate_v4()',
           },
-
           {
             name: 'title',
             type: 'varchar',
@@ -48,8 +50,9 @@ export class Migrations1730777988764 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'int',
+            type: 'uuid',
             isPrimary: true,
+            default: 'uuid_generate_v4()',
           },
           {
             name: 'answer',
@@ -57,7 +60,7 @@ export class Migrations1730777988764 implements MigrationInterface {
           },
           {
             name: 'questionId',
-            type: 'int',
+            type: 'uuid',
           },
           {
             name: 'created_at',
@@ -80,5 +83,9 @@ export class Migrations1730777988764 implements MigrationInterface {
     );
   }
 
-  public async down(): Promise<void> {}
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropForeignKey('answer', 'FK_answer_questionId');
+    await queryRunner.dropTable('answer');
+    await queryRunner.dropTable('question');
+  }
 }

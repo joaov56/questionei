@@ -9,13 +9,15 @@ export class CreateQuestionService {
     @InjectRepository(Question)
     private questionRepository: Repository<Question>,
   ) {}
+
   async execute() {
-    return this.questionRepository.save({
-      title: 'How to create a question?',
-      description: 'I need to know how to create a question',
-      category: 'programming',
-      subject: 'nodejs',
-      level: 'easy',
-    });
+    const question = new Question();
+    question.title = 'How to create a question?';
+    question.description = 'I need to know how to create a question';
+    question.category = 'programming';
+    question.subject = 'nodejs';
+    question.level = 'easy';
+
+    return this.questionRepository.save(question);
   }
 }

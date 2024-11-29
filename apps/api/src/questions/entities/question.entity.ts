@@ -1,9 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Answer } from '../../answers/entities/answer.entity';
 
 @Entity()
 export class Question {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   title: string;
@@ -19,4 +20,7 @@ export class Question {
 
   @Column()
   level: string;
+
+  @OneToMany(() => Answer, (answer) => answer.question)
+  answers: Answer[];
 }
