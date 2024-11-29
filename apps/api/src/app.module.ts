@@ -9,7 +9,9 @@ import { AnswersController } from './answers/controllers/answer.controler';
 import { CreateAnswerService } from './answers/services/create-answer.service';
 import { Answer } from './answers/entities/answer.entity';
 import { ListQuestionAnswersService } from './questions/services/list-question-answers.service';
-import { UsersModule } from './users/users.module';
+import { User } from './users/entities/user.entity';
+import { CreateUserService } from './users/services/create-user.service';
+import { UsersController } from './users/controllers/users.controller';
 
 @Module({
   imports: [
@@ -22,15 +24,14 @@ import { UsersModule } from './users/users.module';
       useFactory: async (configService: ConfigService) =>
         configService.get('typeorm'),
     }),
-    TypeOrmModule.forFeature([Question]),
-    TypeOrmModule.forFeature([Answer]),
-    UsersModule,
+    TypeOrmModule.forFeature([Question, Answer, User]),
   ],
-  controllers: [QuestionsController, AnswersController],
+  controllers: [QuestionsController, AnswersController, UsersController],
   providers: [
     CreateQuestionService,
     CreateAnswerService,
     ListQuestionAnswersService,
+    CreateUserService,
   ],
 })
 export class AppModule {}
