@@ -8,6 +8,7 @@ import { Question } from './questions/entities/question.entity';
 import { AnswersController } from './answers/controllers/answer.controler';
 import { CreateAnswerService } from './answers/services/create-answer.service';
 import { Answer } from './answers/entities/answer.entity';
+import { ListQuestionAnswersService } from './questions/services/list-question-answers.service';
 
 @Module({
   imports: [
@@ -24,6 +25,10 @@ import { Answer } from './answers/entities/answer.entity';
     TypeOrmModule.forFeature([Answer]),
   ],
   controllers: [QuestionsController, AnswersController],
-  providers: [CreateQuestionService, CreateAnswerService],
+  providers: [
+    CreateQuestionService,
+    CreateAnswerService,
+    ListQuestionAnswersService,
+  ],
 })
 export class AppModule {}
